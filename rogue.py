@@ -3,13 +3,14 @@ import pygame as pg
 from random import randint
 import interface
 from interface import *
+from functions import *
 
 #Initialisation
 pg.init()
 screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
-knight = [2, 1]
-salle = Salle(0, 0, 10, 10, [])
+knight = [5, 5]
+salle = Salle(4, 4, 10, 10, [], [])
 
 #Movements
 running = True
@@ -37,15 +38,16 @@ while running:
         elif event.type == pg.KEYDOWN:
                 # si la touche est "Q" on veut quitter le programme
             if True:
+                x_new, y_new = knight[0], knight[1]
                 if event.key == pg.K_q:
                     running = False
-                elif event.key == pg.K_UP and salle.dans_salle(knight[0], knight[1] - 1):
+                elif event.key == pg.K_UP and salle.dans_salle(x_new, y_new - 1):
                     knight[1] -= 1
-                elif event.key == pg.K_DOWN and salle.dans_salle(knight[0], knight[1] + 1):
+                elif event.key == pg.K_DOWN and salle.dans_salle(x_new, y_new + 1):
                     knight[1] += 1
-                elif event.key == pg.K_RIGHT and salle.dans_salle(knight[0] + 1, knight[1]):
+                elif event.key == pg.K_RIGHT and salle.dans_salle(x_new + 1, y_new):
                     knight[0] += 1
-                elif event.key == pg.K_LEFT and salle.dans_salle(knight[0] - 1, knight[1]):
+                elif event.key == pg.K_LEFT and salle.dans_salle(x_new - 1, y_new):
                     knight[0] -= 1
 
     salle.affiche(screen)
