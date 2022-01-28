@@ -4,17 +4,18 @@ from random import randint
 
 #Initialisation
 pg.init()
-screen = pg.display.set_mode((600, 600))
+screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
 knight = [11, 10]
+
 
 #Movements
 running = True
 while running:
     clock.tick(5)
     #Mise en place des salles
-    for i in range(30):
-        for j in range(30):
+    for i in range(50):
+        for j in range(50):
             x=i*20
             y=j*20
             rect = pg.Rect(x, y, 20, 20)
@@ -32,16 +33,17 @@ while running:
             # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
             elif event.type == pg.KEYDOWN:
                 # si la touche est "Q" on veut quitter le programme
-                if event.key == pg.K_q:
-                    running = False
-                elif event.key == pg.K_UP:
-                    knight[1] -= 1
-                elif event.key == pg.K_DOWN:
-                    knight[1] += 1
-                elif event.key == pg.K_RIGHT:
-                    knight[0] += 1
-                elif event.key == pg.K_LEFT:
-                    knight[0] -= 1
+                pass
+                    if event.key == pg.K_q:
+                        running = False
+                    elif event.key == pg.K_UP:
+                        knight[1] -= 1
+                    elif event.key == pg.K_DOWN:
+                        knight[1] += 1
+                    elif event.key == pg.K_RIGHT:
+                        knight[0] += 1
+                    elif event.key == pg.K_LEFT:
+                        knight[0] -= 1
 
     # les coordonnées de rectangle que l'on dessine
     x = 20*knight[0] # coordonnée x (colonnes) en pixels
