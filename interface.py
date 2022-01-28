@@ -9,11 +9,6 @@ liste_origines = [(100, 100)]
 
 
 
-
-
-    
-
-
 taille = 20
 
 
@@ -44,26 +39,34 @@ class Salle:
 
     def choix_porte(self):
         x0, y0 = self.x0, self.y0
-        pos = randint(0, 2 *
-                      self.longueur + 2*self.hauteur)
+        
         booleen = True
         while booleen:
+            pos = randint(0, 2 *
+                      self.longueur + 2*self.hauteur)
+        
             if pos < self.longueur :
                 x_porte = x0 + pos 
-                y_porte = y0
-            elif pos > self.longueur  and pos < self.longueur + self.hauteur -1 :
+                y_porte = y0-1
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
+            elif pos > self.longueur  and pos < self.longueur + self.hauteur  :
                 x_porte = x0 + self.longueur 
                 y_porte = y0 + pos - self.longueur
-            elif pos > self.longueur + self.hauteur -1 and pos < 2*self.longueur + self.hauteur -2:
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
+            elif pos > self.longueur + self.hauteur -1 and pos < 2*self.longueur + self.hauteur :
                 x_porte = x0 + pos - self.longueur - self.hauteur
                 y_porte = y0 + self.hauteur 
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
             elif pos > 2*self.longueur + self.hauteur -3:
-                x_porte = x0
+                x_porte = x0 -1
                 y_porte = y0 + pos - 2*self.longueur - self.hauteur
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
             
-            if (x_porte, y_porte) not in self.portes :
-                booleen = False
-        self.portes.append((x_porte - 1, y_porte - 1))
+        self.portes.append((x_porte , y_porte ))
 
     def dans_salle(self, x, y):
         return (x < self.x0 + self.longueur) and (x >= self.x0) and (y < self.y0 + self.hauteur) and (y >= self.y0)
@@ -76,11 +79,11 @@ class Salle:
                         taille*(self.longueur + 2), taille*(self.hauteur + 2))
         rect2 = pg.Rect(self.x0*taille, self.y0*taille,
                         taille*self.longueur, taille*self.hauteur)
-        pg.draw.rect(screen, (255, 0, 0), rect1)
-        pg.draw.rect(screen, (0, 255, 0), rect2)
+        pg.draw.rect(screen, (206,206,206), rect1)
+        pg.draw.rect(screen, (179,139,109), rect2)
         for x, y in self.portes:
             rect = pg.Rect(x*taille, y*taille, taille, taille)
-            pg.draw.rect(screen, (0, 0, 255), rect)
+            pg.draw.rect(screen, (64,224,208), rect)
 
     
 class Niveau:
@@ -104,8 +107,8 @@ class Niveau:
             hauteur = randint(4,6)
             longueur = randint(4,6)
             salle = Salle(x,y,hauteur,longueur)
-            salle.choix_porte()
             if self.pas_dans_salles(salle):
+                salle.choix_porte()
                 self.salles.append(salle)
     
     def affiche_niveau(self, screen):
