@@ -25,8 +25,8 @@ class Salle:
 
     
     def affiche(self, screen):
-        rect1 = pg.Rect(taille*(self.x0 -1), taille*(self.y0 -1), taille*self.longueur, taille*self.hauteur)
-        rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*(self.longueur +2), taille*(self.hauteur +2))
+        rect1 = pg.Rect(taille*(self.x0 -1), taille*(self.y0-1), taille*(self.longueur +2), taille*(self.hauteur +2))
+        rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*self.longueur, taille*self.hauteur )
         pg.draw.rect(screen, (255,0,0), rect1 )
         pg.draw.rect(screen, (0,255,0), rect2 )
 
