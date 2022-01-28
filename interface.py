@@ -54,7 +54,7 @@ class Salle:
                 y_porte = y0 + pos - 2*self.longueur - self.hauteur
             if (x_porte, y_porte) not in self.portes:
                 booleen = False
-        self.portes.append((x_porte - 1, y_porte - 1))
+        self.portes = [(x_porte - 1, y_porte - 1)]
 
     def dans_salle(self, x, y):
         return (x < self.x0 + self.longueur) and (x >= self.x0) and (y < self.y0 + self.hauteur) and (y >= self.y0)
@@ -135,6 +135,8 @@ class Couloir:
                 else:
                     y += 1
                 liste.append(x, y)
+                if x > 50 or y > 50:
+
         self.coordonnees.append(x, y)
 
 
