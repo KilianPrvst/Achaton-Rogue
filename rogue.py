@@ -6,7 +6,7 @@ import interface
 from interface import *
 from functions import *
 
-#Initialisation
+# Initialisation
 pg.init()
 j = 0
 counter = 1
@@ -20,15 +20,19 @@ monster = [salle.x0 + salle.longueur//2, salle.y0 + salle.hauteur//2]
 surprise = [randint(salle.x0, salle.x0 + salle.longueur), randint(salle.y0, salle.y0 + salle.hauteur)]
 knight = [salle.x0 + 2, salle.y0 + 2]
 
+
+#salle = Salle(1, 7, 10, 10, [(2,6)], [])
+#monster = [salle.x0 + salle.longueur//2, salle.y0 + salle.hauteur//2]
+
 #Movements
 running = True
 while running:
-    clock.tick(10)
+    clock.tick(5)
     #Mise en place des salles
     for i in range(50):
         for j in range(50):
-            x=i*20
-            y=j*20
+            x = i*20
+            y = j*20
             rect = pg.Rect(x, y, 20, 20)
             if (i+j)%2==0:
                 color = (0, 0, 0)
@@ -49,6 +53,7 @@ while running:
                 running = False
                 # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
             elif event.type == pg.KEYDOWN:
+            # si la touche est "Q" on veut quitter le programme
                 if True:
                     x_new, y_new = knight[0], knight[1]
                     if event.key == pg.K_q:
@@ -57,9 +62,9 @@ while running:
                         knight[1] -= 1
                     elif event.key == pg.K_DOWN and (salle.dans_salle(knight[0], knight[1] + 1) or (salle.dans_porte(knight[0], knight[1] + 1))):
                         knight[1] += 1
-                    elif event.key == pg.K_RIGHT and (salle.dans_salle(knight[0] + 1, knight[1]) or (salle.dans_porte(knight[0]+1, knight[1] ))):
+                    elif event.key == pg.K_RIGHT and (salle.dans_salle(knight[0] + 1, knight[1]) or (salle.dans_porte(knight[0]+1, knight[1]))):
                         knight[0] += 1
-                    elif event.key == pg.K_LEFT and (salle.dans_salle(knight[0] - 1, knight[1]) or (salle.dans_porte(knight[0]-1, knight[1] ))):
+                    elif event.key == pg.K_LEFT and (salle.dans_salle(knight[0] - 1, knight[1]) or (salle.dans_porte(knight[0]-1, knight[1]))):
                         knight[0] -= 1
 
             distance = np.sqrt((knight[0] - monster[0])**2 + (knight[1] - monster[1])**2)  
@@ -76,6 +81,9 @@ while running:
         if knight[0] == surprise[0] and knight[1] == surprise[1]:
             surprise[0], surprise[1] = randint(0, 49), randint(0, 49)
 
+
+    
+        
                 
 
     salle.affiche(screen)
@@ -95,17 +103,17 @@ while running:
 
     niveau.affiche_niveau(screen)
     # les coordonnées de rectangle que l'on dessine
-    x = 20*knight[0] # coordonnée x (colonnes) en pixels
-    y = 20*knight[1] # coordonnée y (lignes) en pixels
-    width = 20 # largeur du rectangle en pixels
-    height = 20 # hauteur du rectangle en pixels
+    x = 20*knight[0]  # coordonnée x (colonnes) en pixels
+    y = 20*knight[1]  # coordonnée y (lignes) en pixels
+    width = 20  # largeur du rectangle en pixels
+    height = 20  # hauteur du rectangle en pixels
     rect = pg.Rect(x, y, width, height)
     # appel à la méthode draw.rect()
-    color = (0, 0, 0) # couleur rouge
+    color = (0, 0, 0)  # couleur rouge
     pg.draw.rect(screen, color, rect)
     counter += 1
     pg.display.update()
 
 
-#Conclusion
+# Conclusion
 pg.quit()
