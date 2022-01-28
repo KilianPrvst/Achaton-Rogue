@@ -1,4 +1,5 @@
 from os import lseek
+from zipfile import LargeZipFile
 import pygame as pg
 from random import randint
 import random  as rd
@@ -6,13 +7,11 @@ import numpy as np
 taille =20
 liste_origines = [(100, 100)]
 
-class Niveau:
-    pass   
+
 
 class Salle:
 
-    @classmethod
-    def create(x_porte, y_porte):
+    
 
     def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
         self.x0 = x0
@@ -70,6 +69,38 @@ class Couloir:
         self.longueur_2, self.hauteur_2 = longueur_2, hauteur_2
 
     
+class Niveau:
+    def __init__(self, numero, escaliers=[], salles=[], couloirs=[]):
+        self.numero = numero
+        self.escaliers = escaliers
+        self.salles = salles
+        self.couloirs = couloirs
+    
+    def pas_dans_salles(self, s):
+        bol = True
+        for salle in self.salles:
+            bol = bol and ( s.x0>salle.x0 + salle.longueur or s.x0 + s.longueur <salle.x0 or s.y0>salle.y0+salle.hauteur or s.y0 + s.hauteur<salle.y0)
+        return bol 
 
+
+    def creer_salles(self, nombre_salles):
+        while len(self.salles)<nombre_salles:
+            x = randint(0, 50)
+            y = randint(0, 50)
+            hauteur = randint(4,6)
+            longueur = randint(4,6)
+            salle = Salle(x,y,hauteur,longueur)
+            if self.pas_dans_salles(salle):
+                self.salles.append(salle)
+    
+    def affiche_niveau(self, screen):
+        for salle in self.salles:
+            salle.affiche(screen)
+        
+
+
+# niveau = Niveau (1)
+# niveau.creer_salles(5)
+# print(niveau.salles)
 #salle = Salle(0,0,10,10,[])
 #print(salle.dans_salle(9,9))

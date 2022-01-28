@@ -11,9 +11,10 @@ pg.init()
 screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
 knight = [5, 8]
-salle = Salle(1, 7, 10, 10, [(2,6)], [])
-monster = [salle.x0 + salle.longueur//2, salle.y0 + salle.hauteur//2]
-
+#salle = Salle(1, 7, 10, 10, [(2,6)], [])
+#monster = [salle.x0 + salle.longueur//2, salle.y0 + salle.hauteur//2]
+niveau = Niveau (1)
+niveau.creer_salles(5)
 #Movements
 running = True
 while running:
@@ -54,7 +55,7 @@ while running:
         
                 
 
-    salle.affiche(screen)
+    niveau.affiche_niveau(screen)
     # les coordonnées de rectangle que l'on dessine
     x = 20*knight[0] # coordonnée x (colonnes) en pixels
     y = 20*knight[1] # coordonnée y (lignes) en pixels
