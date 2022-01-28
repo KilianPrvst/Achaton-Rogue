@@ -16,7 +16,7 @@ knight = [5, 8]
 niveau = Niveau(1)
 niveau.creer_salles(5)
 salle = niveau.salles[0]
-salle.choix_portes()
+salle.choix_porte()
 
 
 # Movements

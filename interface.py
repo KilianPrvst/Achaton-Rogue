@@ -121,7 +121,7 @@ class Couloir:
     def __init__(self):
         self.coordonnees = []
 
-    def couloir(self, salle_1, salle_2, niveau):
+    def couloir(self, salle_1, salle_2):
         porte_1 = salle_1.portes[0]
         x, y = porte_1
         cases_2 = salle_2.cases()
@@ -136,6 +136,7 @@ class Couloir:
                     y += 1
                 liste.append(x, y)
                 if x > 50 or y > 50:
+                    salle.choix_portes()
 
         self.coordonnees.append(x, y)
 
