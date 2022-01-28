@@ -1,3 +1,4 @@
+from os import lseek
 import pygame as pg
 from random import randint
 import random  as rd
@@ -26,7 +27,6 @@ class Salle:
         rect2 = pg.Rect((self.x0 + 1)*20, (self.y0 + 1)*20, 20*(self.longueur -2), 20*(self.hauteur -2))
         pg.draw.rect(screen, (255,0,0), rect1 )
         pg.draw.rect(screen, (0,255,0), rect2 )
-
 
     
 
