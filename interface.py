@@ -8,6 +8,9 @@ class Niveau:
     pass   
 class Salle:
 
+    @classmethod
+    def create(x_porte, y_porte):
+
     def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
         self.x0 = x0
         self.y0 = y0
