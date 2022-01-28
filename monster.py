@@ -1,5 +1,7 @@
 import numpy as np
 import pygame as pg
+
+
 monster_size = (10,10)
 def create_monster(x,y,salle):
     """IN : position du personnnage. OUT : Position des monstres"""

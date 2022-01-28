@@ -27,13 +27,14 @@ class Salle:
         return (x,y) in self.portes
     
     def affiche(self, screen):
+        surprise = [randint(self.x0, self.x0 + self.longueur), randint(self.y0, self.y0 + self.hauteur)]
         rect1 = pg.Rect(taille*(self.x0 -1), taille*(self.y0-1), taille*(self.longueur +2), taille*(self.hauteur +2))
         rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*self.longueur, taille*self.hauteur )
-        pg.draw.rect(screen, (255,0,0), rect1 )
-        pg.draw.rect(screen, (0,255,0), rect2 )
+        pg.draw.rect(screen, (206,206,206), rect1 )
+        pg.draw.rect(screen, (179,139,109), rect2 )
         for x,y in self.portes:
             rect = pg.Rect(x*taille, y*taille, taille, taille )
-            pg.draw.rect(screen, (0,0,255), rect )
+            pg.draw.rect(screen, (64,224,208), rect )
 
     def choix_porte(self):
         x0, y0 = self.origine
