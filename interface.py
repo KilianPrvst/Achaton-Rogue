@@ -8,7 +8,7 @@ class Niveau:
     pass   
 class Salle:
 
-    def __init__(self, x0, y0, longueur, hauteur, portes, attributs):
+    def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
         self.x0 = x0
         self.y0 = y0
         self.longueur = longueur
@@ -25,14 +25,17 @@ class Salle:
 
     
     def affiche(self, screen):
-        rect1 = pg.Rect(taille*(self.x0 -1), taille(self.y0-1), taille*(self.longueur +2), taille*(self.hauteur +2))
+        rect1 = pg.Rect(taille*(self.x0 -1), taille*(self.y0-1), taille*(self.longueur +2), taille*(self.hauteur +2))
         rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*self.longueur, taille*self.hauteur )
         pg.draw.rect(screen, (255,0,0), rect1 )
         pg.draw.rect(screen, (0,255,0), rect2 )
+        for x,y in self.portes:
+            rect = pg.Rect(x*taille, y*taille, taille, taille )
+            pg.draw.rect(screen, (0,0,255), rect )
 
 
     
 
-salle = Salle(0,0,10,10,[])
-print(salle.dans_salle(9,9))
+salle = Salle(0,0,10,10,[(1,0)])
+print(salle.dans_porte(1,0))
 
