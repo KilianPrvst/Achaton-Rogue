@@ -15,7 +15,7 @@ class Salle:
         self.portes = portes
     
     def dans_salle(self, x, y):
-        return (x<self.x0 + self.longueur) and (x>self.x0) and (y<self.y0 + self.largeur) and (y>self.y0)
+        return (x<self.x0 + self.longueur) and (x>self.x0) and (y<self.y0 + self.hauteur) and (y>self.y0)
     
 
     def dans_porte(self, x, y):
@@ -23,7 +23,7 @@ class Salle:
     
 
     
-    def salle(self, screen):
+    def affiche(self, screen):
         rect = pg.Rect(self.x0, self.y0, self.longueur, self.hauteur)
         pg.draw.rect(screen, (255,0,0), rect )
 
