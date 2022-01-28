@@ -33,7 +33,7 @@ while running:
             # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
             elif event.type == pg.KEYDOWN:
                 # si la touche est "Q" on veut quitter le programme
-                pass
+                if True:
                     if event.key == pg.K_q:
                         running = False
                     elif event.key == pg.K_UP:
