@@ -2,6 +2,7 @@ import pygame as pg
 from random import randint
 import random  as rd
 import numpy as np
+taille =20
 
 class Niveau:
     pass   
@@ -17,16 +18,17 @@ class Salle:
     def dans_salle(self, x, y):
         return (x<self.x0 + self.longueur) and (x>self.x0) and (y<self.y0 + self.hauteur) and (y>self.y0)
     
-
     def dans_porte(self, x, y):
         return (x,y) in self.portes
     
-
-    
     def affiche(self, screen):
-        rect = pg.Rect(self.x0, self.y0, self.longueur, self.hauteur)
-        pg.draw.rect(screen, (255,0,0), rect )
+        rect1 = pg.Rect(self.x0 * 20, self.y0 * 20, 20*self.longueur, 20*self.hauteur)
+        rect2 = pg.Rect((self.x0 + 1)*20, (self.y0 + 1)*20, 20*(self.longueur -2), 20*(self.hauteur -2))
+        pg.draw.rect(screen, (255,0,0), rect1 )
+        pg.draw.rect(screen, (0,255,0), rect2 )
+
 
     
 
-
+#salle = Salle(0,0,10,10,[])
+#print(salle.dans_salle(9,9))

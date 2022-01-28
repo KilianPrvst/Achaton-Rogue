@@ -9,7 +9,7 @@ pg.init()
 screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
 knight = [2, 1]
-salle = Salle(0, 0, 200, 200, [])
+salle = Salle(0, 0, 10, 10, [])
 
 #Movements
 running = True
