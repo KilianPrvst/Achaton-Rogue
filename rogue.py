@@ -9,8 +9,8 @@ from functions import *
 pg.init()
 screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
-knight = [5, 5 + 3]
-salle = Salle(1, 1 + 3, 10, 10, [], [])
+knight = [5, 8]
+salle = Salle(1, 7, 10, 10, [(2,6)], [])
 
 #Movements
 running = True
@@ -41,13 +41,13 @@ while running:
                 x_new, y_new = knight[0], knight[1]
                 if event.key == pg.K_q:
                     running = False
-                elif event.key == pg.K_UP and salle.dans_salle(x_new, y_new - 1):
+                elif event.key == pg.K_UP and (salle.dans_salle(knight[0], knight[1] - 1) or (salle.dans_porte(knight[0], knight[1] - 1))):
                     knight[1] -= 1
-                elif event.key == pg.K_DOWN and salle.dans_salle(x_new, y_new + 1):
+                elif event.key == pg.K_DOWN and (salle.dans_salle(knight[0], knight[1] + 1) or (salle.dans_porte(knight[0], knight[1] + 1))):
                     knight[1] += 1
-                elif event.key == pg.K_RIGHT and salle.dans_salle(x_new + 1, y_new):
+                elif event.key == pg.K_RIGHT and (salle.dans_salle(knight[0] + 1, knight[1]) or (salle.dans_porte(knight[0]+1, knight[1] ))):
                     knight[0] += 1
-                elif event.key == pg.K_LEFT and salle.dans_salle(x_new - 1, y_new):
+                elif event.key == pg.K_LEFT and (salle.dans_salle(knight[0] - 1, knight[1]) or (salle.dans_porte(knight[0]-1, knight[1] ))):
                     knight[0] -= 1
                 
 

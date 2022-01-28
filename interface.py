@@ -11,7 +11,7 @@ class Niveau:
 
 class Salle:
 
-    def __init__(self, x0, y0, longueur, hauteur, portes, attributs):
+    def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
         self.x0 = x0
         self.y0 = y0
         self.longueur = longueur
@@ -31,6 +31,9 @@ class Salle:
         rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*self.longueur, taille*self.hauteur )
         pg.draw.rect(screen, (255,0,0), rect1 )
         pg.draw.rect(screen, (0,255,0), rect2 )
+        for x,y in self.portes:
+            rect = pg.Rect(x*taille, y*taille, taille, taille )
+            pg.draw.rect(screen, (0,0,255), rect )
 
     def choix_porte(self):
         x0, y0 = self.origine
