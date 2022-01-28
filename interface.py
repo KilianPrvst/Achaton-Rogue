@@ -1,5 +1,7 @@
 import pygame as pg
 from random import randint
+import random  as rd
+import numpy as np
 
 class Niveau:
     pass   
@@ -21,4 +23,10 @@ class Salle:
     
 
     
+    def salle(self, screen):
+        rect = pg.Rect(self.x0, self.y0, self.longueur, self.hauteur)
+        pg.draw.rect(screen, (255,0,0), rect )
+
+    
+
 
