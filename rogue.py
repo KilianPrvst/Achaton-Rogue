@@ -9,8 +9,8 @@ from functions import *
 pg.init()
 screen = pg.display.set_mode((1000, 1000))
 clock = pg.time.Clock()
-knight = [5, 5]
-salle = Salle(4, 4, 10, 10, [], [])
+knight = [5, 5 + 3]
+salle = Salle(1, 1 + 3, 10, 10, [], [])
 
 #Movements
 running = True
@@ -49,6 +49,7 @@ while running:
                     knight[0] += 1
                 elif event.key == pg.K_LEFT and salle.dans_salle(x_new - 1, y_new):
                     knight[0] -= 1
+                
 
     salle.affiche(screen)
     # les coordonnées de rectangle que l'on dessine
