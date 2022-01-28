@@ -1,8 +1,6 @@
 from random import randint
 import pygame as pg
 
-taille = 20
-
 
 class Salle:
     def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
@@ -10,7 +8,7 @@ class Salle:
         self.y0 = y0
         self.longueur = longueur
         self.hauteur = hauteur
-        self.portes = portes
+        self.position_portes = portes
         self.attributs = attributs
 
     def choix_porte(self):
@@ -36,30 +34,18 @@ class Salle:
         self.position_porte.append((x_porte, y_porte))
 
     def dans_salle(self, x, y):
-        return (x < self.x0 + self.longueur) and (x >= self.x0) and (y < self.y0 + self.hauteur) and (y >= self.y0)
+        return (x < self.x0 + self.longueur) and (x > self.x0) and (y < self.y0 + self.hauteur) and (y > self.y0)
 
     def dans_porte(self, x, y):
         return (x, y) in self.portes
 
     def affiche(self, screen):
-        rect1 = pg.Rect(taille*(self.x0 - 1), taille(self.y0-1),
-                        taille*self.longueur, taille*self.hauteur)
-        rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille *
-                        (self.longueur + 2), taille*(self.hauteur + 2))
+        rect1 = pg.Rect(self.x0 * 20, self.y0 * 20, 20 *
+                        self.longueur, 20*self.hauteur)
+        rect2 = pg.Rect((self.x0 + 1)*20, (self.y0 + 1)*20,
+                        20*(self.longueur - 2), 20*(self.hauteur - 2))
         pg.draw.rect(screen, (255, 0, 0), rect1)
         pg.draw.rect(screen, (0, 255, 0), rect2)
-
-
-salle = Salle(0, 0, 10, 10, [])
-print(salle.dans_salle(9, 9))
-
-
-class Niveau:
-    def __init__(self, liste_origines, nb_salles):
-        self.origines = liste_origines
-        self.nb_salles = nb_salles
-
-    def creation_salle(nb_salles):
 
 
 class Couloir:
@@ -68,3 +54,4 @@ class Couloir:
         self.salle_0 = Salle(x0, y0, longueur_0, hauteur_0, portes, attributs)
 
     def couloir(self):
+        pass
