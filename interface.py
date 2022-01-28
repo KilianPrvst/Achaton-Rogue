@@ -50,20 +50,26 @@ class Salle:
         while booleen:
             if pos < self.longueur :
                 x_porte = x0 + pos 
-                y_porte = y0
-            elif pos > self.longueur  and pos < self.longueur + self.hauteur -1 :
+                y_porte = y0-1
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
+            elif pos > self.longueur  and pos < self.longueur + self.hauteur  :
                 x_porte = x0 + self.longueur 
                 y_porte = y0 + pos - self.longueur
-            elif pos > self.longueur + self.hauteur -1 and pos < 2*self.longueur + self.hauteur -2:
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
+            elif pos > self.longueur + self.hauteur -1 and pos < 2*self.longueur + self.hauteur :
                 x_porte = x0 + pos - self.longueur - self.hauteur
                 y_porte = y0 + self.hauteur 
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
             elif pos > 2*self.longueur + self.hauteur -3:
-                x_porte = x0
+                x_porte = x0 -1
                 y_porte = y0 + pos - 2*self.longueur - self.hauteur
+                if (x_porte, y_porte) not in self.portes :
+                    booleen = False
             
-            if (x_porte, y_porte) not in self.portes :
-                booleen = False
-        self.portes.append((x_porte - 1, y_porte - 1))
+        self.portes.append((x_porte , y_porte ))
 
     def dans_salle(self, x, y):
         return (x < self.x0 + self.longueur) and (x >= self.x0) and (y < self.y0 + self.hauteur) and (y >= self.y0)
@@ -104,8 +110,8 @@ class Niveau:
             hauteur = randint(4,6)
             longueur = randint(4,6)
             salle = Salle(x,y,hauteur,longueur)
-            salle.choix_porte()
             if self.pas_dans_salles(salle):
+                salle.choix_porte()
                 self.salles.append(salle)
     
     def affiche_niveau(self, screen):
