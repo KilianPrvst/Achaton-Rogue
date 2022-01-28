@@ -1,4 +1,5 @@
 from os import lseek
+from zipfile import LargeZipFile
 import pygame as pg
 from random import randint
 import random  as rd
@@ -6,10 +7,11 @@ import numpy as np
 taille =20
 liste_origines = [(100, 100)]
 
-class Niveau:
-    pass   
+
 
 class Salle:
+
+    
 
     def __init__(self, x0, y0, longueur, hauteur, portes=[], attributs=[]):
         self.x0 = x0
@@ -27,7 +29,6 @@ class Salle:
         return (x,y) in self.portes
     
     def affiche(self, screen):
-        surprise = [randint(self.x0, self.x0 + self.longueur), randint(self.y0, self.y0 + self.hauteur)]
         rect1 = pg.Rect(taille*(self.x0 -1), taille*(self.y0-1), taille*(self.longueur +2), taille*(self.hauteur +2))
         rect2 = pg.Rect(self.x0*taille, self.y0*taille, taille*self.longueur, taille*self.hauteur )
         pg.draw.rect(screen, (206,206,206), rect1 )
@@ -68,6 +69,38 @@ class Couloir:
         self.longueur_2, self.hauteur_2 = longueur_2, hauteur_2
 
     
+class Niveau:
+    def __init__(self, numero, escaliers=[], salles=[], couloirs=[]):
+        self.numero = numero
+        self.escaliers = escaliers
+        self.salles = salles
+        self.couloirs = couloirs
+    
+    def pas_dans_salles(self, s):
+        bol = True
+        for salle in self.salles:
+            bol = bol and ( s.x0>salle.x0 + salle.longueur or s.x0 + s.longueur <salle.x0 or s.y0>salle.y0+salle.hauteur or s.y0 + s.hauteur<salle.y0)
+        return bol 
 
+
+    def creer_salles(self, nombre_salles):
+        while len(self.salles)<nombre_salles:
+            x = randint(0, 50)
+            y = randint(0, 50)
+            hauteur = randint(4,6)
+            longueur = randint(4,6)
+            salle = Salle(x,y,hauteur,longueur)
+            if self.pas_dans_salles(salle):
+                self.salles.append(salle)
+    
+    def affiche_niveau(self, screen):
+        for salle in self.salles:
+            salle.affiche(screen)
+        
+
+
+# niveau = Niveau (1)
+# niveau.creer_salles(5)
+# print(niveau.salles)
 #salle = Salle(0,0,10,10,[])
 #print(salle.dans_salle(9,9))
