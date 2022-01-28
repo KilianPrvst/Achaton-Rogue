@@ -1,7 +1,5 @@
 from random import randint
 import pygame as pg
-<< << << < HEAD
-
 
 liste_origines = [(100, 100)]
 
@@ -13,9 +11,10 @@ class Niveau:
 
 class Salle:
     def __init__(self, x0, y0, longueur, hauteur):
-        self.x0, self.y0 = x0, y0
+        self.origine = x0, y0
         self.longueur = longueur
         self.hauteur = hauteur
+        self.position_porte = []
 
     def choix_porte(self):
         x0, y0 = self.origine
@@ -37,7 +36,7 @@ class Salle:
                 y_porte = y0 + pos - 2*self.longueur - self.hauteur
             if (x_porte, y_porte) not in self.position_porte:
                 booleen = False
-        return x_porte, y_porte
+        return self.position_porte.append(x_porte, y_porte)
 
 
 class Couloir:
@@ -48,32 +47,6 @@ class Couloir:
         self.longueur_1, self.hauteur_1 = longueur_1, hauteur_1
         self.longueur_2, self.hauteur_2 = longueur_2, hauteur_2
 
-    def choix_porte(self):
-        x0, y0 = self.origine
-        pos = randint(self.origine, self.origine + 2 *
-                      self.longueur + 2*self.hauteur)
-        booleen = True
-        while booleen:
-            if pos < self.origine + self.longueur:
-                x_porte = x0 + pos
-                y_porte = y0
-            if pos >= self.origine + self.longueur and pos < self.origine + self.longueur + self.hauteur:
-                x_porte = x0 + self.longueur
-                y_porte = y0 + pos - self.longueur
-            if pos >= self.origine + self.longueur + self.hauteur and pos < self.origine + 2*self.longueur + self.hauteur:
-                x_porte = x0 + pos - self.longueur - self.hauteur
-                y_porte = y0 - self.hauteur
-            if pos >= self.origine + 2*self.longueur + self.hauteur:
-                x_porte = x0
-                y_porte = y0 + pos - 2*self.longueur - self.hauteur
-            if (x_porte, y_porte) not in self.position_porte:
-                booleen = False
-        return x_porte, y_porte
-
 
 def couloir():
-
-
-== == == =
-
->>>>>> > pierre
+    pass
